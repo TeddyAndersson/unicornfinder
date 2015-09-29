@@ -1,6 +1,6 @@
 * {
     top: 0;
-    down: 0;
+    bottom: 0;
     left: 0;
     right:0;
     
@@ -22,10 +22,34 @@ section {
     margin: 0;
 }
 
-header {
-    width: 20%;
-    margin: 0 auto;
-    text-align: center;
-    text-transform: uppercase;
-}
+    header {
+        width: 20%;
+        margin: 0 auto;
+        text-align: center;
+        text-transform: uppercase;
+    }
+    
+    article {
+        background: rgba(252, 118, 239,0.5);
+        width: 50%;
+        margin: 20px auto;
+    }
+
+    article a {
+        text-decoration: none;
+        letter-spacing: 0.1em;
+        display: block;
+        padding: 20px;
+        color: #fff;
+    }
+
+    article a:hover {
+        background: #ff6bed;
+    }
+
+    article a.link_arrow {
+
+    }
+
+
 
