@@ -48,7 +48,15 @@ def render_main_page():
     unicorn_list = r.json()
     return template('index', unicorn_list=unicorn_list)
 
+@route('/unicorn/<id>', method='GET')
+def render_unicorn_page(id):
 
+    url = "http://unicorns.idioti.se/" + str(id)
+    headers = {"Accept": "application/json"}
+    r = requests.get(url, headers=headers)
+    unicorn_dict = r.json()
+
+    return template("unicorn", unicorn_dict=unicorn_dict)
 
 
 #command for running the service local.    
