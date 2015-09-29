@@ -6,7 +6,7 @@
 #All imports for the project
 from bottle import route, run, template, request, response, static_file, redirect
 import bottle
-
+import os
 import urllib2
 import requests
 
@@ -46,7 +46,8 @@ def render_main_page():
     headers = {"Accept": "application/json"}
     r = requests.get(url, headers=headers)
     unicorn_list = r.json()
-    return template('index', unicorn_list)
+    print unicorn_list[0].get("name")
+    return template('index', unicorn_list=unicorn_list)
 
 @route('/unicorn/<id>', method='GET')
 def render_unicorn_page(id):
