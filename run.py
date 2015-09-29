@@ -44,13 +44,9 @@ def render_main_page():
 
     url = "http://unicorns.idioti.se"
     headers = {"Accept": "application/json"}
-    r = requests.get(url, headers = headers)
-
-    data = r.json()
-
-    print data
-
-    return str(data)
+    r = requests.get(url, headers=headers)
+    unicorn_list = r.json()
+    return template('index', unicorn_list)
 
 
 
