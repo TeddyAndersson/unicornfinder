@@ -7,6 +7,10 @@
 from bottle import route, run, template, request, response, static_file, redirect
 import bottle
 
+import urllib2
+import requests
+
+
 '''---------------------------- Code for Routes with static files -----------------------------'''
 
 @route('/static/Css/<filename>')
@@ -35,9 +39,16 @@ def send_static(filename):
 
 '''----------------------- Code for Routes --------------------------'''
 
-@route('/')
-def index():
-    return template('index')
+@route('/', method='GET')
+def render_main_page():
+
+    url = "http://unicorns.idioti.se"
+    headers = {"Accept": "application/json"}
+    r = requests.get(url, headers=headers)
+    unicorn_list = r.json()
+    return template('index', unicorn_list)
+
+
 
 
 #command for running the service local.    
