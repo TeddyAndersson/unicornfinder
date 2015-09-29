@@ -37,7 +37,7 @@ def send_static(filename):
 
 @route('/')
 def index():
-    pass
+    return template('index')
 
 
 #command for running the service local.    
