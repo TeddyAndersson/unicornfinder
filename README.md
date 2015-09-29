@@ -1,5 +1,3 @@
 # unicornfinder
 
-496099
-unicornfinder
-mashup
+AIzaSyCJhyHp-740GGvy4bBLJatNOIOnru-4hfA
