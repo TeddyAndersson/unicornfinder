@@ -46,15 +46,14 @@ def render_main_page():
     headers = {"Accept": "application/json"}
     r = requests.get(url, headers=headers)
     unicorn_list = r.json()
-    print unicorn_list[0].get("name")
     return template('index', unicorn_list=unicorn_list)
 
 
 
 
 #command for running the service local.    
-#run(host='localhost', port=8080, debug=True, reloader=True)
+run(host='localhost', port=8080, debug=True, reloader=True)
 
 #command for running the service on heroku. 
 port = os.environ.get('PORT', 5000) #Get required port, default to 5000.
-run(host='0.0.0.0', port=port)
+#run(host='0.0.0.0', port=port)

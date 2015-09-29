@@ -12,11 +12,7 @@
         </header>
         %for u in unicorn_list:
         <article>
-            <img sr="">
-            <h2>{{u.get("name")}}</h2>
-            <p>
-                
-            </p>
+            <a href="/unicorn/{{u.get('id')}}">{{u.get('name')}} <span class="link_arrow">&#8227;</span></a>
         </article>
         %end
         
