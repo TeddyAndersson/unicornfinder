@@ -7,10 +7,9 @@
 }
 
 body {
-    background-color: #000;
+    background-color: #ECECEC;
     font-family:'Oswald', sans-serif;
 	font-size: 17px;
-
 }
 
 html, body {
@@ -18,5 +17,15 @@ html, body {
 }
 
 section {
-    
+    width: 100%;
+    height: auto;
+    margin: 0;
 }
+
+header {
+    width: 20%;
+    margin: 0 auto;
+    text-align: center;
+    text-transform: uppercase;
+}
+
