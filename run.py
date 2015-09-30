@@ -80,21 +80,27 @@ def get_nearby_lodgings(lat, lon):
     for lodge in nearby_lodgings_list:
         a_lodge_dict = {}
         a_lodge_dict["name"] = lodge.get("name")
-        a_lodge_dict["website"] = get_place_website(lodge.get("place_id"))
+        details_dict = get_place_details(lodge.get("place_id"))
+        a_lodge_dict["website"] = details_dict.get("website")
+        a_lodge_dict["rating"] = details_dict.get("rating")
         lodgings_dict["lodgings"].append(a_lodge_dict)
 
     return lodgings_dict
 
 
-def get_place_website(place_id):
+def get_place_details(place_id):
     place_url = "https://maps.googleapis.com/maps/api/place/details/json?" + \
                 "key=" + key + \
                 "placeid=" + place_id
     place_req = requests.get(place_url)
+
     print(place_url)
     print(place_req.json().get("result").get("website"))
-    return place_req.json().get("result").get("website")
 
+    website = place_req.json().get("result").get("website")
+    rating = place_req.json().get("result").get("rating")
+    place_details_dict = {"website": website, "rating": rating}
+    return place_details_dict
 
 def get_nearby_lodging_url(lat, lon, radius):
     types = "lodging"
