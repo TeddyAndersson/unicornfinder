@@ -11,8 +11,17 @@
             <h1>Unicornfinder</h1>
         </header>
         
-        <article>
-            <a href="/unicorn/{{u.get('id')}}">{{unicorn.get('name')}} <span class="link_arrow">&#8227;</span></a>
+        <article class="unicorn">
+            <h2>{{unicorn.get('name')}}</span></h2>
+            <div class = "description">
+                <h3>Beskrivning av enhörningen</h3>
+                <p>{{unicorn.get('description')}}</p>
+            </div>
+            <img src="{{unicorn.get('image')}}">
+            <div class ="reportedby">
+                <p>Enhörning har skådats av: {{unicorn.get('reportedby')}}</p>
+            </div>
+            <p>d</p>
         </article>
         
     </section>
