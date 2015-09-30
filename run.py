@@ -51,8 +51,8 @@ def render_main_page():
 @route('/unicorn/<id>', method='GET')
 def render_unicorn_page(id):
     unicorn_url = "http://unicorns.idioti.se/" + str(id)
-    r = requests.get(unicorn_url, headers={"Accept": "application/json"})
-    unicorn_dict = r.json()
+    unicorn_req = requests.get(unicorn_url, headers={"Accept": "application/json"})
+    unicorn_dict = unicorn_req.json()
 
     lat = str(unicorn_dict.get("spottedWhere").get("lat"))
     lon = str(unicorn_dict.get("spottedWhere").get("lon"))
@@ -60,12 +60,15 @@ def render_unicorn_page(id):
     types = "lodging"
     key = "AIzaSyCJhyHp-740GGvy4bBLJatNOIOnru-4hfA"
     nearby_url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?" + \
-          "location=" + lat + "," + lon + "&" + \
-          "radius=" + hotel_radius + "&" + \
-          "types=" + types + "&" + \
-          "key=" + key
+                 "location=" + lat + "," + lon + "&" + \
+                 "radius=" + hotel_radius + "&" + \
+                 "types=" + types + "&" + \
+                 "key=" + key
 
-    print nearby_url
+    print(nearby_url)
+    nearby_req = requests.get(nearby_url)
+    nearby_res_list = nearby_req.json()
+    print(str(nearby_res_list[0].get("name")))
     return template("unicorn", unicorn=unicorn_dict)
 
 
