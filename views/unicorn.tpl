@@ -18,10 +18,9 @@
                 <p>{{unicorn.get('description')}}</p>
             </div>
             <img src="{{unicorn.get('image')}}">
-            <div class ="reportedby">
-                <p>Enhörning har skådats av: {{unicorn.get('reportedby')}}</p>
+            <div class="spotted">
+            <p >Enhörningen skådades i {{unicorn.get('spottedWhere', {}).get('name')}} av {{unicorn.get('reportedBy')}} {{unicorn.get('spottedWhen', {}).get('date')}}  </p>
             </div>
-            <p>d</p>
         </article>
         
     </section>

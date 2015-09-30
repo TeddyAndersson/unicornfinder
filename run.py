@@ -57,8 +57,8 @@ def render_unicorn_page(id):
     lat = str(unicorn_dict.get("spottedWhere").get("lat"))
     lon = str(unicorn_dict.get("spottedWhere").get("lon"))
     nearby_res_list = get_nearby_lodges_list(lat, lon)
-
-    print(str(nearby_res_list[0].get("name")))
+    for i in nearby_res_list:
+        print i.get('name')
 
     return template("unicorn", unicorn=unicorn_dict)
 
@@ -68,13 +68,13 @@ def get_nearby_lodges_list(lat, lon):
     nearby_url = get_nearby_lodges_url(lat, lon, lodges_radius)
     nearby_req = requests.get(nearby_url)
     nearby_response_json = nearby_req.json()
-    while nearby_response_json.get("results").size == 0:
+    while len(nearby_response_json.get("results")) == 0:
         nearby_url = get_nearby_lodges_url(lat, lon, (lodges_radius + 7000))
         nearby_req = requests.get(nearby_url)
         nearby_response_json = nearby_req.json()
         print(nearby_url)
     print("Final URL: " + nearby_url)
-    return nearby_url
+    return nearby_response_json.get('results')
 
 
 def get_nearby_lodges_url(lat, lon, radius):
