@@ -32,35 +32,94 @@ section {
     }
     
     article {
-        background: rgba(252, 118, 239,0.5);
         width: 50%;
         margin: 20px auto;
     }
-        .unicorn {
-            width: 80%;
-            
-        }
 
-        .unicorn h2 {
-            color: #fff;
-            font-size: 3em;
-        }
-
-    article a {
+     article a {
         text-decoration: none;
         letter-spacing: 0.1em;
         display: block;
         padding: 20px;
         color: #fff;
-    }
-
-    article a:hover {
         background: #ff6bed;
     }
 
-    article a.link_arrow {
-            
+    article a:hover {
+        background: #ffbbed;
     }
 
+        #unicorn {
+            width: 60%;
+            
+        }
 
+        #unicorn h2 {
+            color: rgb(252, 118, 239);;
+            font-size: 3em;
+            background: #000;
+            padding: 2% 2%;
+            margin: 2% 0;
+            text-align: center;
+        }
+
+            #unicorn-wrapper {
+                display: table-row;
+                background: rgb(252, 118, 239);
+            }
+
+            #description, #unicorn-image {
+                display: inline-block;
+                zoom: 1;
+                vertical-align: top;
+                font-size: 12px;
+                z-index: 3;
+                margin: 0;
+            }
+
+            #unicorn-wrapper #unicorn-image {
+                width: 30%;
+                padding: 5% 5%;
+
+            }
+                #unicorn-image img.displayed {
+                    display: block;
+                    margin-left: auto;
+                    margin-right: auto;
+                    height: auto;
+                    width: 100%;
+                    border-radius: 5px;
+                        
+                }
+
+            #unicorn-wrapper #description {
+                width: 50%;
+                padding: 5%;
+            }
+
+                #description h3 {
+                    font-size: 2em;
+                } 
+                
+                #description p {
+                    font-size: 1.5em;
+                    color: #000;
+                }
+
+                #description #spotted {
+                    font-size: 8px;
+                    padding: 5% 0;
+                }
+        
+        #lodges {
+            width: 60%;
+        }
+        
+            #lodges .lodge {
+                margin: 2% 0;
+            }
+
+                #lodges .lodge a {
+                    border-left: 10px solid #ffbbed;
+                }
 

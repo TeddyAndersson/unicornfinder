@@ -90,7 +90,7 @@ def get_nearby_lodgings(lat, lon):
 
 def get_place_details(place_id):
     place_url = "https://maps.googleapis.com/maps/api/place/details/json?" + \
-                "key=" + key + \
+                "key=" + key + "&" + \
                 "placeid=" + place_id
     place_req = requests.get(place_url)
 
