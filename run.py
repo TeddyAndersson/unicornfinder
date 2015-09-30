@@ -67,7 +67,7 @@ def render_unicorn_page(id):
 
     print(nearby_url)
     nearby_req = requests.get(nearby_url)
-    nearby_res_list = nearby_req.json()
+    nearby_res_list = nearby_req.json().get("results")
     print(str(nearby_res_list[0].get("name")))
     return template("unicorn", unicorn=unicorn_dict)
 
