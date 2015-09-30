@@ -36,15 +36,15 @@ def send_static(filename):
     return static_file(filename, root='./static/Images') 
 
 '''----------------------- Code for Routes --------------------------'''
-
+key = "AIzaSyCJhyHp-740GGvy4bBLJatNOIOnru-4hfA"
 
 @route('/', method='GET')
 def render_main_page():
 
     url = "http://unicorns.idioti.se"
     headers = {"Accept": "application/json"}
-    r = requests.get(url, headers=headers)
-    unicorns_list = r.json()
+    req = requests.get(url, headers=headers)
+    unicorns_list = req.json()
     return template('index', unicorns=unicorns_list)
 
 
@@ -56,30 +56,48 @@ def render_unicorn_page(id):
 
     lat = str(unicorn_dict.get("spottedWhere").get("lat"))
     lon = str(unicorn_dict.get("spottedWhere").get("lon"))
-    nearby_res_list = get_nearby_lodges_list(lat, lon)
-    for i in nearby_res_list:
-        print i.get('name')
+    nearby_lodgings_dict = get_nearby_lodgings(lat, lon)
 
-    return template("unicorn", unicorn=unicorn_dict)
+    return template("unicorn", unicorn=unicorn_dict,
+                    lodgings=nearby_lodgings_dict.get("lodgings"),
+                    radius=nearby_lodgings_dict.get("radius"))
 
 
-def get_nearby_lodges_list(lat, lon):
-    lodges_radius = 7000
-    nearby_url = get_nearby_lodges_url(lat, lon, lodges_radius)
+def get_nearby_lodgings(lat, lon):
+    lodgings_radius = 7000
+    nearby_url = get_nearby_lodging_url(lat, lon, lodgings_radius)
     nearby_req = requests.get(nearby_url)
     nearby_response_json = nearby_req.json()
     while len(nearby_response_json.get("results")) == 0:
-        nearby_url = get_nearby_lodges_url(lat, lon, (lodges_radius + 7000))
+        nearby_url = get_nearby_lodging_url(lat, lon, (lodgings_radius + 7000))
         nearby_req = requests.get(nearby_url)
         nearby_response_json = nearby_req.json()
         print(nearby_url)
     print("Final URL: " + nearby_url)
-    return nearby_response_json.get('results')
+    nearby_lodgings_list = nearby_response_json.get('results')
+    lodgings_dict = {"radius": str(lodgings_radius), "lodgings": []}
+
+    for lodge in nearby_lodgings_list:
+        a_lodge_dict = {}
+        a_lodge_dict["name"] = lodge.get("name")
+        a_lodge_dict["website"] = get_place_website(lodge.get("place_id"))
+        lodgings_dict["lodgings"].append(a_lodge_dict)
+
+    return lodgings_dict
 
 
-def get_nearby_lodges_url(lat, lon, radius):
+def get_place_website(place_id):
+    place_url = "https://maps.googleapis.com/maps/api/place/details/json?" + \
+                "key=" + key + \
+                "placeid=" + place_id
+    place_req = requests.get(place_url)
+    print(place_url)
+    print(place_req.json().get("result").get("website"))
+    return place_req.json().get("result").get("website")
+
+
+def get_nearby_lodging_url(lat, lon, radius):
     types = "lodging"
-    key = "AIzaSyCJhyHp-740GGvy4bBLJatNOIOnru-4hfA"
     nearby_url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?" + \
                  "location=" + lat + "," + lon + "&" + \
                  "radius=" + str(radius) + "&" + \
