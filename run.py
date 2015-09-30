@@ -7,7 +7,6 @@
 from bottle import route, run, template, request, response, static_file, redirect
 import bottle
 import os
-import urllib2
 import requests
 
 
@@ -19,18 +18,17 @@ def send_static(filename):
     return static_file(filename, root='./static/Css') 
 
 
-
 @route('/static/JS/<filename>')
 def send_static(filename):
     "Hanterar JavaScripts filer"
     return static_file(filename, root='./static/JS') 
 
 
-
 @route('/static/fonts/<filename>')
 def send_static(filename):
     "Hanterar Typsnitts filer"
     return static_file(filename, root='./static/Fonts') 
+
 
 @route('/static/images/<filename>')
 def send_static(filename):
@@ -39,24 +37,36 @@ def send_static(filename):
 
 '''----------------------- Code for Routes --------------------------'''
 
+
 @route('/', method='GET')
 def render_main_page():
 
     url = "http://unicorns.idioti.se"
     headers = {"Accept": "application/json"}
     r = requests.get(url, headers=headers)
-    unicorn_list = r.json()
-    return template('index', unicorn_list=unicorn_list)
+    unicorns_list = r.json()
+    return template('index', unicorns=unicorns_list)
+
 
 @route('/unicorn/<id>', method='GET')
 def render_unicorn_page(id):
-
-    url = "http://unicorns.idioti.se/" + str(id)
-    headers = {"Accept": "application/json"}
-    r = requests.get(url, headers=headers)
+    unicorn_url = "http://unicorns.idioti.se/" + str(id)
+    r = requests.get(unicorn_url, headers={"Accept": "application/json"})
     unicorn_dict = r.json()
 
-    return template("unicorn", unicorn_dict=unicorn_dict)
+    lat = str(unicorn_dict.get("spottedWhere").get("lat"))
+    lon = str(unicorn_dict.get("spottedWhere").get("lon"))
+    hotel_radius = str(7000)
+    types = "lodging"
+    key = "AIzaSyCJhyHp-740GGvy4bBLJatNOIOnru-4hfA"
+    nearby_url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?" + \
+          "location=" + lat + "," + lon + "&" + \
+          "radius=" + hotel_radius + "&" + \
+          "types=" + types + "&" + \
+          "key=" + key
+
+    print nearby_url
+    return template("unicorn", unicorn=unicorn_dict)
 
 
 #command for running the service local.    
