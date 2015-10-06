@@ -8,6 +8,7 @@ from bottle import route, run, template, request, response, static_file, redirec
 import bottle
 import os
 import requests
+import json
 
 
 '''---------------------------- Code for Routes with static files -----------------------------'''
@@ -45,7 +46,12 @@ def render_main_page():
     headers = {"Accept": "application/json"}
     req = requests.get(url, headers=headers)
     unicorns_list = req.json()
-    return template('index', unicorns=unicorns_list)
+
+    if request.headers.get('Accept') == "application/json":
+        response.set_header("Content-Type", "application/json")
+        return json.dumps(unicorns_list)
+    else:
+        return template('index', unicorns=unicorns_list)
 
 
 @route('/unicorn/<id>', method='GET')
