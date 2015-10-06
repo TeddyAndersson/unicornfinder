@@ -53,6 +53,7 @@ def render_unicorn_page(id):
     unicorn_url = "http://unicorns.idioti.se/" + str(id)
     unicorn_req = requests.get(unicorn_url, headers={"Accept": "application/json"})
     unicorn_dict = unicorn_req.json()
+    unicorn_dict["spottedWhen"]["date"] = unicorn_dict["spottedWhen"]["date"][:10]
 
     lat = str(unicorn_dict.get("spottedWhere").get("lat"))
     lon = str(unicorn_dict.get("spottedWhere").get("lon"))
