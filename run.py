@@ -76,6 +76,9 @@ def render_unicorn_page(id):
                     lodgings=nearby_lodgings_dict.get("lodgings"),
                     radius=nearby_lodgings_dict.get("radius"))
 
+@route('/api', method='GET')
+def render_api_page():
+    return template("api-doc")
 
 def get_nearby_lodgings(lat, lon):
     lodgings_radius = 7000
