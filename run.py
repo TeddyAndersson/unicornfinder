@@ -67,9 +67,10 @@ def render_unicorn_page(id):
 
     if request.headers.get('Accept') == "application/json":
         response.set_header("Content-Type", "application/json")
-        return json.dumps(unicorn_dict,
-                          nearby_lodgings_dict.get("lodgings"),
-                          nearby_lodgings_dict.get("radius"))
+        unicorn_json_dict = unicorn_dict
+        unicorn_json_dict["nearbyLodgings"] = {"lodgings": nearby_lodgings_dict.get("lodgings"),
+                                               "lodgingSearchRadius": nearby_lodgings_dict.get("radius")}
+        return json.dumps(unicorn_json_dict)
     else:
         return template("unicorn", unicorn=unicorn_dict,
                     lodgings=nearby_lodgings_dict.get("lodgings"),
