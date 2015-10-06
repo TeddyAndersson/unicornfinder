@@ -65,7 +65,13 @@ def render_unicorn_page(id):
     lon = str(unicorn_dict.get("spottedWhere").get("lon"))
     nearby_lodgings_dict = get_nearby_lodgings(lat, lon)
 
-    return template("unicorn", unicorn=unicorn_dict,
+    if request.headers.get('Accept') == "application/json":
+        response.set_header("Content-Type", "application/json")
+        return json.dumps(unicorn_dict,
+                          nearby_lodgings_dict.get("lodgings"),
+                          nearby_lodgings_dict.get("radius"))
+    else:
+        return template("unicorn", unicorn=unicorn_dict,
                     lodgings=nearby_lodgings_dict.get("lodgings"),
                     radius=nearby_lodgings_dict.get("radius"))
 
