@@ -40,16 +40,20 @@
     </section>
     <section>
         <article id="lodges">
-            <h2>Hotell <span>inom radien av {{radius}}</span></h2>
+            <h2>Hotell i närheten</h2>
             %for l in lodgings:
-                %if l.get('website') != None:
+                %if l.get('website') != None and l.get('rating') != None:
                 <div class="lodge">
-                    <a href="{{l.get('website')}}">{{l.get('name')}} {{l.get('rating')}}</a>
+                    <a href="{{l.get('website')}}">{{l.get('name')}} <span class="rating">{{l.get('rating')}} i google betyg</span></a>
                 </div>
                 %end
             %end
         </article>
     </section>
+    
+    <pre><code>enter
+            lol
+    </code></pre>
     
 </body>
     

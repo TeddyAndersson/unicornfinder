@@ -34,6 +34,7 @@ section {
     article {
         width: 50%;
         margin: 20px auto;
+        margin-bottom: 50px;
     }
 
      article a {
@@ -122,4 +123,59 @@ section {
                 #lodges .lodge a {
                     border-left: 10px solid #ffbbed;
                 }
+                
+                    .lodge a .rating {
+                        float: right;
+                        font-size: 13px;
+                    }
+
+#section-api {
+    padding: 6em;
+    width: auto;
+}
+
+        article.api-doc {
+            width: 100%;
+            text-align: left;
+            margin-bottom: 10px;
+        }
+
+        article.api-doc .title {
+            width: inherit;
+            margin:0 0 20px;
+            text-align: left;
+            text-transform: none;
+        }
+
+        article.api-doc .subtitle {
+            width: inherit;
+            margin:10px 0;
+            text-align: left;
+            text-transform: none;
+        }
+
+        article.api-doc  h1.title {
+            font-size: 2em;
+        }
+
+
+        article.api-doc  h2.title {
+            font-size: 1.5em;
+        }
+
+        article.api-doc  h3.subtitle {
+            font-size: 1.2em;
+        }
+
+        article.api-doc pre{
+            background-color: #f7f7f7;
+            width: 100%;
+            white-space: pre-wrap;
+            padding: 20px;
+            font-size: 13px;
+        }
+        
+        article.api-doc pre code{
+            width: inherit;
+        }
 
