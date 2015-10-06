@@ -40,7 +40,7 @@ def send_static(filename):
 key = "AIzaSyCJhyHp-740GGvy4bBLJatNOIOnru-4hfA"
 
 @route('/', method='GET')
-def render_main_page():
+def main_page():
 
     url = "http://unicorns.idioti.se"
     headers = {"Accept": "application/json"}
@@ -55,7 +55,7 @@ def render_main_page():
 
 
 @route('/unicorn/<id>', method='GET')
-def render_unicorn_page(id):
+def unicorn_page(id):
     unicorn_url = "http://unicorns.idioti.se/" + str(id)
     unicorn_req = requests.get(unicorn_url, headers={"Accept": "application/json"})
     unicorn_dict = unicorn_req.json()
@@ -76,8 +76,16 @@ def render_unicorn_page(id):
                     lodgings=nearby_lodgings_dict.get("lodgings"),
                     radius=nearby_lodgings_dict.get("radius"))
 
+@route('/unicorn/', method='POST')
+def add_unicorn():
+    if request.headers.get('Accept') == "application/json":
+        response.set_header("Content-Type", "application/json")
+        add_unicorn_url = "http://unicorns.idioti.se/"
+        print request.body
+        #add_unicorn_req = requests.get(add_unicorn_url, headers={"Accept": "application/json"})
+
 @route('/api', method='GET')
-def render_api_page():
+def api_page():
     return template("api-doc")
 
 def get_nearby_lodgings(lat, lon):
