@@ -92,11 +92,10 @@ def get_nearby_lodgings(lat, lon):
     nearby_lodgings_list = nearby_response_json.get('results')
     lodgings_dict = {"radius": str(lodgings_radius), "lodgings": []}
     for lodge in nearby_lodgings_list:
-        a_lodge_dict = {}
-        a_lodge_dict["name"] = lodge.get("name")
         details_dict = get_place_details(lodge.get("place_id"))
-        a_lodge_dict["website"] = details_dict.get("website")
-        a_lodge_dict["rating"] = details_dict.get("rating")
+        a_lodge_dict = {"name": lodge.get("name"),
+                        "website": details_dict.get("website"),
+                        "rating": details_dict.get("rating")}
         lodgings_dict["lodgings"].append(a_lodge_dict)
     return lodgings_dict
 
