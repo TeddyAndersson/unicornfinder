@@ -49,11 +49,7 @@
                 %end
             %end
         </article>
-    </section>
-    
-    <pre><code>enter
-            lol
-    </code></pre>
+    </section>x
     
 </body>
     

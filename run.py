@@ -49,7 +49,8 @@ def main_page():
         response.set_header("Content-Type", "application/json")
         return json.dumps(unicorns_list)
     else:
-        return template('index', unicorns=unicorns_list)
+        unicorns = sorted(unicorns_list, key=lambda k: k['name'])
+        return template('index', unicorns=unicorns)
 
 
 @route('/unicorn/<id>', method='GET')
@@ -68,6 +69,7 @@ def unicorn_page(id):
                                                "lodgingSearchRadius": nearby_lodgings_dict.get("radius")}
         return json.dumps(unicorn_json_dict)
     else:
+        print nearby_lodgings_dict
         return template("unicorn", unicorn=unicorn_dict,
                     lodgings=nearby_lodgings_dict.get("lodgings"),
                     radius=nearby_lodgings_dict.get("radius"))
