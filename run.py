@@ -37,7 +37,7 @@ def send_static(filename):
     return static_file(filename, root='./static/Images') 
 
 '''----------------------- Code for Routes --------------------------'''
-key = "AIzaSyCJhyHp-740GGvy4bBLJatNOIOnru-4hfA"
+key = "AIzaSyACeeo4FSwZm6iBpP6sQ-ocIw-cuT7h8do"
 
 @route('/', method='GET')
 def main_page():
@@ -86,7 +86,8 @@ def get_nearby_lodgings(lat, lon):
     nearby_req = requests.get(nearby_url)
     nearby_response_json = nearby_req.json()
     while len(nearby_response_json.get("results")) == 0:
-        nearby_url = get_nearby_lodging_url(lat, lon, (lodgings_radius + 7000))
+        lodgings_radius = lodgings_radius + 7000
+        nearby_url = get_nearby_lodging_url(lat, lon, (lodgings_radius))
         nearby_req = requests.get(nearby_url)
         nearby_response_json = nearby_req.json()
         print(nearby_url)
