@@ -124,8 +124,8 @@ def get_nearby_lodging_url(lat, lon, radius):
     return nearby_url
 
 #command for running the service local.    
-run(host='localhost', port=8080, debug=True, reloader=True)
+#run(host='0.0.0.0', port=8080, debug=True, reloader=True)
 
 #command for running the service on heroku. 
 port = os.environ.get('PORT', 5000) #Get required port, default to 5000.
-#run(host='0.0.0.0', port=port)
+run(host='0.0.0.0', port=port)
